@@ -38,7 +38,7 @@ trait TestsModelSpecification
      */
     protected function assertFields(): void
     {
-        $entity = $this->factory->create();
+        $entity = $this->factory->make();
         $this->assertCount(count($this->fields), array_intersect($this->fields, array_keys($entity->getAttributes())));
     }
 
@@ -47,18 +47,28 @@ trait TestsModelSpecification
      *
      * @param $data
      */
-    protected function assertIsInDatabase($data): void
+    protected function assertIsInDatabase($data, $relationShips = []): void
     {
-        $entity = $this->factory->create($data);
+
+        $factory = $this->factory;
+        foreach ($relationShips as $key => $relationShip) {
+            $factory = $factory->for($relationShip, $key);
+        }
+        $entity = $factory->create($data);
+
         $this->assertDatabaseHas($entity->getTable(), $data);
     }
 
     /**
      * Assert that without the required fields the entity cannot be written to the database.
      */
-    protected function assertRequiredFields(): void
+    protected function assertRequiredFields($relationShips = []): void
     {
         $oldCount = $this->className::all()->count();
+        $factory = $this->factory;
+        foreach ($relationShips as $key => $relationShip) {
+            $factory = $factory->for($relationShip, $key);
+        }
         $entity = $this->factory->make();
         $fields = collect($this->requiredFields);
         $fields->each(function ($field) use (&$entity) {

@@ -43,7 +43,8 @@ class UserSpecificationTest extends TestCase
      */
     public function it_is_written_to_the_database()
     {
-        $this->assertIsInDatabase(['name' => 'Tanja Bräther']);
+        $relations = $this->getRelations();
+        $this->assertIsInDatabase(['name' => 'Tanja Bräther'],$relations);
     }
 
     /**
@@ -51,7 +52,8 @@ class UserSpecificationTest extends TestCase
      */
     public function it_cannot_be_written_to_the_db_without_required_fields()
     {
-        $this->assertRequiredFields();
+        $relations = $this->getRelations();
+        $this->assertRequiredFields($relations);
     }
 
     /**
@@ -66,5 +68,17 @@ class UserSpecificationTest extends TestCase
             ->create();
 
         $this->assertEquals('admin', $user->role->name);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getRelations(): array
+    {
+        $role = Role::factory(['name' => 'user'])->create();
+        $relations = [
+            'role' => $role,
+        ];
+        return $relations;
     }
 }
