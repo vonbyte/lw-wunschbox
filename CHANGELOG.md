@@ -4,6 +4,7 @@
 
 ### Core
 
+* Set node modules
 * Add changelog automation
 * Initial Laravel commit
 
