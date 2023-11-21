@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file，ChangeLog 
 
 ## [v0.1.0](/compare/v0.1.0...master)
 
+
 ### fix
 
 * Clean up test structure ([a21454c](/commit/a21454c))
@@ -16,5 +17,5 @@ All notable changes to this project will be documented in this file，ChangeLog 
 * Add role relationship to user model ([82c73aa](/commit/82c73aa))
 * Add role model and tests ([3c8bec2](/commit/3c8bec2))
 * Adjust User Model and add tests ([c4a3843](/commit/c4a3843))
-* Set node modules 
-* Initial Laravel commit ([ba7a6319](/commit/ba7a6319)) 
+* Set node modules ([8f0875b](/commit/8f0875b))
+* Initial Laravel commit ([ba7a6319](/commit/ba7a6319))
